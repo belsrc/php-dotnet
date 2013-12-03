@@ -1,0 +1,34 @@
+{
+    "name": "belsrc/php.net",
+    "description": ".Net like methods and classes in PHP",
+    "license": "BSD 3 Clause",
+    "keywords": [".net", "collection", "list", "dictionary", "string"],
+    "authors": [
+        {
+            "name": "Bryan Kizer",
+            "email": "bryan@bryanckizer.com"
+        }
+    ],
+    "require": {
+        
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "phpunit/php-code-coverage": ">=1.2.10,<1.3.0",
+        "sami/sami": "1.0.*@dev",
+        "pdepend/pdepend" : "1.1.0",
+        "phpmd/phpmd" : "1.4.*",
+        "sebastian/phpcpd": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "src",
+            "src/Collection",
+            "src/String"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev"
+}
