@@ -43,6 +43,8 @@
          * @return true if the value parameter occurs within this string, or if value is the empty string (""); otherwise, false.
          */
         public function containsIgnoreCase( $value ) {
+            if( empty( $value ) ) { return true; }
+
             foreach( (array) $value as $n ) {
                 if( mb_stripos( $this->_base, $n ) !== false ) {
                     return true;
@@ -59,6 +61,8 @@
          * @return bool   true if value matches the end of this string; otherwise, false.
          */
         public function endsWith( $values ) {
+            if( empty( $value ) ) { return true; }
+
             foreach( (array)$values as $value ) {
                 if( $value == mb_substr( $this->_base, mb_strlen( $this->_base ) - mb_strlen( $value ) ) ) {
                     return true;
@@ -147,6 +151,8 @@
          * @return bool   true if value matches the start of this string; otherwise, false.
          */
         public function startsWith( $values ) {
+            if( empty( $value ) ) { return true; }
+
             foreach( (array)$values as $value ) {
                 if( mb_strpos( $this->_base, $value ) === 0 ) {
                     return true;
