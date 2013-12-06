@@ -4,23 +4,31 @@
 
     class StringTest extends PHPUnit_Framework_TestCase {
 
+        protected $test;
+
+        // Since this doesn't seem to run for me on each test I'll just
+        // call it at the start of each.
+        protected function setUp() {
+            $this->test = new Str( 'This is a test string test string' );
+        }
+
         /**
          * @test
          */
         public function testContains() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = true;
-            $actual = $test->contains( '' );
+            $actual = $this->test->contains( '' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
             $expected = false;
-            $actual = $test->contains( 'correct' );
+            $actual = $this->test->contains( 'correct' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
             $expected = true;
-            $actual = $test->contains( 'test' );
+            $actual = $this->test->contains( 'test' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -29,19 +37,19 @@
          * @test
          */
         public function testContainsIgnoreCase() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = true;
-            $actual = $test->containsIgnoreCase( '' );
+            $actual = $this->test->containsIgnoreCase( '' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
             $expected = false;
-            $actual = $test->containsIgnoreCase( 'CORRECT' );
+            $actual = $this->test->containsIgnoreCase( 'CORRECT' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
             $expected = true;
-            $actual = $test->containsIgnoreCase( 'TEST' );
+            $actual = $this->test->containsIgnoreCase( 'TEST' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -50,14 +58,14 @@
          * @test
          */
         public function testEndsWith() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = false;
-            $actual = $test->endsWith( 'array' );
+            $actual = $this->test->endsWith( 'array' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertFalse( $actual, $msg );
 
             $expected = true;
-            $actual = $test->endsWith( 'string' );
+            $actual = $this->test->endsWith( 'string' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertTrue( $actual, $msg );
         }
@@ -66,9 +74,9 @@
          * @test
          */
         public function testLength() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = strlen ( 'This is a test string test string' );
-            $actual = $test->length();
+            $actual = $this->test->length();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -77,14 +85,14 @@
          * @test
          */
         public function testReplace() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'This is a fake test string fake test string';
-            $actual = $test->replace( 'test', 'fake test' );
+            $actual = $this->test->replace( 'test', 'fake test' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
             $expected = 'This is a test string test string';
-            $actual = $test->replace( 'coding', 'boring coding' );
+            $actual = $this->test->replace( 'coding', 'boring coding' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -93,14 +101,14 @@
          * @test
          */
         public function testReplaceFirst() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'This is a fake test string test string';
-            $actual = $test->replaceFirst( 'test', 'fake test' );
+            $actual = $this->test->replaceFirst( 'test', 'fake test' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
             $expected = 'This is a test string test string';
-            $actual = $test->replace( 'coding', 'boring coding' );
+            $actual = $this->test->replace( 'coding', 'boring coding' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -109,14 +117,14 @@
          * @test
          */
         public function testReplaceLast() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'This is a test string fake test string';
-            $actual = $test->replaceLast( 'test', 'fake test' );
+            $actual = $this->test->replaceLast( 'test', 'fake test' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
             $expected = 'This is a test string test string';
-            $actual = $test->replace( 'coding', 'boring coding' );
+            $actual = $this->test->replace( 'coding', 'boring coding' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -125,9 +133,9 @@
          * @test
          */
         public function testReverse() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'gnirts tset gnirts tset a si sihT';
-            $actual = $test->reverse();
+            $actual = $this->test->reverse();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -136,9 +144,9 @@
          * @test
          */
         public function testStripWhiteSpace() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'Thisisateststringteststring';
-            $actual = $test->stripWhiteSpace();
+            $actual = $this->test->stripWhiteSpace();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -147,14 +155,14 @@
          * @test
          */
         public function testStartsWith() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = false;
-            $actual = $test->startsWith( 'That ' );
+            $actual = $this->test->startsWith( 'That ' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertFalse( $actual, $msg );
 
             $expected = true;
-            $actual = $test->startsWith( 'This ' );
+            $actual = $this->test->startsWith( 'This ' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertTrue( $actual, $msg );
         }
@@ -163,9 +171,9 @@
          * @test
          */
         public function testTruncateStart() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = '...test string test string';
-            $actual = $test->truncateStart( 27 );
+            $actual = $this->test->truncateStart( 27 );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -174,9 +182,9 @@
          * @test
          */
         public function testTruncateEnd() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'This is a test string...';
-            $actual = $test->truncateEnd( 24 );
+            $actual = $this->test->truncateEnd( 24 );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -185,9 +193,9 @@
          * @test
          */
         public function testToLower() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'this is a test string test string';
-            $actual = $test->toLower();
+            $actual = $this->test->toLower();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -196,9 +204,9 @@
          * @test
          */
         public function testToUpper() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'THIS IS A TEST STRING TEST STRING';
-            $actual = $test->toUpper();
+            $actual = $this->test->toUpper();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -207,9 +215,9 @@
          * @test
          */
         public function testToTitleCase() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'This is a Test String Test String';
-            $actual = $test->toTitleCase();
+            $actual = $this->test->toTitleCase();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
@@ -224,9 +232,9 @@
          * @test
          */
         public function testToCamel() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'thisIsATestStringTestString';
-            $actual = $test->toCamel();
+            $actual = $this->test->toCamel();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -235,9 +243,9 @@
          * @test
          */
         public function testToStudly() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'ThisIsATestStringTestString';
-            $actual = $test->toStudly();
+            $actual = $this->test->toStudly();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -246,9 +254,9 @@
          * @test
          */
         public function testToSnake() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'this_is_a_test_string_test_string';
-            $actual = $test->toSnake();
+            $actual = $this->test->toSnake();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -257,9 +265,9 @@
          * @test
          */
         public function testToSlug() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'this-is-a-test-string-test-string';
-            $actual = $test->toSlug();
+            $actual = $this->test->toSlug();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -268,9 +276,9 @@
          * @test
          */
         public function testTrim() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'his is a test string test string';
-            $actual = $test->trim( 'T.' );
+            $actual = $this->test->trim( 'T.' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -279,9 +287,9 @@
          * @test
          */
         public function testTrimStart() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'his is a test string test string';
-            $actual = $test->trimStart( 'T' );
+            $actual = $this->test->trimStart( 'T' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -290,9 +298,9 @@
          * @test
          */
         public function testTrimEnd() {
-            $test = new Str( 'This is a test string test string.' );
+            $this->setUp();
             $expected = 'This is a test string test string';
-            $actual = $test->trimEnd( '.' );
+            $actual = $this->test->trimEnd( '.' );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -301,9 +309,9 @@
          * @test
          */
         public function testToString() {
-            $test = new Str( 'This is a test string test string' );
+            $this->setUp();
             $expected = 'This is a test string test string';
-            $actual = (string)$test;
+            $actual = (string)$this->test;
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
