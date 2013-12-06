@@ -129,7 +129,7 @@
          * Searches for an element that matches the conditions defined by the specified callable, and returns the zero-based index of the first occurrence within the entire ArrayList.
          *
          * @param  callable $callable The callable that defines the conditions of the element to search for.
-         * @return int The zero-based index of the first occurrence of an element that matches the conditions defined by the callable, if found; otherwise, –1.
+         * @return int The zero-based index of the first occurrence of an element that matches the conditions defined by the callable, if found; otherwise, â€“1.
          */
         public function findIndex( $callable ) {
             if( !is_callable( $callable ) ) {
@@ -172,7 +172,7 @@
          * and returns the zero-based index of the last occurrence within the entire ArrayList.
          *
          * @param  callable $callable The callable that defines the conditions of the element to search for.
-         * @return int The zero-based index of the last occurrence of an element that matches the conditions defined by the callable, if found; otherwise, –1.
+         * @return int The zero-based index of the last occurrence of an element that matches the conditions defined by the callable, if found; otherwise, â€“1.
          */
         public function findLastIndex( $callable ) {
             if( !is_callable( $callable ) ) {
@@ -203,7 +203,7 @@
          * Searches for the specified value and returns the zero-based index of the first occurrence within the entire ArrayList.
          *
          * @param  mixed $value The value to locate in the ArrayList.
-         * @return int The zero-based index of the first occurrence of item within the entire ArrayList, if found; otherwise, –1.
+         * @return int The zero-based index of the first occurrence of item within the entire ArrayList, if found; otherwise, â€“1.
          */
         public function indexOf( $value ) {
             $tmp = array_search( $value, $this->_items );
@@ -235,7 +235,7 @@
          * Searches for the specified object and returns the zero-based index of the last occurrence within the entire ArrayList.
          *
          * @param  mixed $value The value to locate in the ArrayList.
-         * @return int The zero-based index of the last occurrence of item within the entire the ArrayList, if found; otherwise, –1.
+         * @return int The zero-based index of the last occurrence of item within the entire the ArrayList, if found; otherwise, â€“1.
          */
         public function lastIndexOf( $value ) {
             $tmp = array_reverse( $this->_items, true );
