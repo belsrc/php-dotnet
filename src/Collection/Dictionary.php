@@ -30,7 +30,7 @@
          * @param  array $kvp The key value pair to add to the dictionary.
          */
         public function add( $kvp ) {
-            if( empty( $key ) ) {
+            if( empty( $kvp ) ) {
                 throw new Exception( 'Argument exception' );
             }
 

@@ -8,14 +8,14 @@
         
         protected function setUp() {
             $this->test = new ArrayList( array(
-                'One',
-                'Two',
-                'Three',
-                'Four',
-                'Five',
-                'Six',
-                'Seven',
-                'Eight',
+                'Alpha',
+                'Beta',
+                'Gamma',
+                'Delta',
+                'Epsilon',
+                'Zeta',
+                'Eta',
+                'Theta',
             ) );
         }
         
@@ -24,20 +24,20 @@
          */
         public function testAdd() {
             $this->setUp();
-            $expected = new ArrayList( array(
-                'One',
-                'Two',
-                'Three',
-                'Four',
-                'Five',
-                'Six',
-                'Seven',
-                'Eight',
-                'Nine',
+            $expected = new ArrayList\ArrayList( array(
+                'Alpha',
+                'Beta',
+                'Gamma',
+                'Delta',
+                'Epsilon',
+                'Zeta',
+                'Eta',
+                'Theta',
+                'Iota'
             ) );
-            $actual = $this->test->add( 'Nine' );
-            $msg = "Failed asserting $expected is $actual";
-            $this->assertEquals( $expected, $actual, $msg );
+            $this->test->add( 'Iota' );
+            $msg = "Failed asserting $expected is " . $this->test;
+            $this->assertTrue( $expected == $this->test, $msg );
         }
         
         /**
@@ -45,6 +45,12 @@
          */
         public function testAll() {
             $this->setUp();
+            $expected = true;
+            $actual = $this->test->all( function( $element ) {
+                return $element !== '';
+            } );
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
         }
 
         /**
@@ -52,6 +58,12 @@
          */
         public function testAny() {
             $this->setUp();
+            $expected = false;
+            $actual = $this->test->all( function( $element ) {
+                return $element !== '';
+            } );
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
         }
 
         /**
@@ -59,6 +71,10 @@
          */
         public function testClear() {
             $this->setUp();
+            $expected = new ArrayList\ArrayList();
+            $this->test->clear();
+            $msg = "Failed asserting $expected is " . $this->test;
+            $this->assertTrue( $expected == $this->test, $msg );
         }
 
         /**
@@ -77,6 +93,23 @@
          */
         public function testDistinct() {
             $this->setUp();
+            $test = new ArrayList\ArrayList( array(
+                'Alpha',
+                'Beta',
+                'Gamma',
+                'Delta',
+                'Epsilon',
+                'Gamma',
+                'Alpha',
+            ) );
+            $expected = new ArrayList\ArrayList( array(
+                'Beta',
+                'Delta',
+                'Epsilon'
+            ) );
+            $actual = $test->distinct();
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertTrue( $expected == $actual, $msg );
         }
 
         /**
@@ -266,6 +299,7 @@
          */
         public function testTake() {
             $this->setUp();
+            
         }
 
         /**
