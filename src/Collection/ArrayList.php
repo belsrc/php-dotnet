@@ -14,7 +14,7 @@
          * @param string|array $array The initial values to add to the collection.
          */
         public function __construct( $array = null ) {
-            $this->_type = 'ArrayList';
+            $this->_type = '\PhpDotNet\Collection\ArrayList';
 
             if( !is_null( $array ) ) {
                 foreach( (array)$array as $v ) {
@@ -50,7 +50,7 @@
             $count = count( $this->_items );
             foreach( $this->_items as $i ) {
                 if( !is_numeric( $i ) ) {
-                    throw new Exception( 'The values of the ArrayList must all be numeric' );
+                    throw new \Exception( 'The values of the ArrayList must all be numeric' );
                 }
 
                 $total += $i;
@@ -77,7 +77,7 @@
          */
         public function exists( $callable ) {
             if( !is_callable( $callable ) ) {
-                throw new Exception( 'The value passed must be callable.' );
+                throw new \Exception( 'The value passed must be callable.' );
             }
 
             $tmp = array_filter( $this->_items, $callable );
@@ -90,50 +90,15 @@
         }
 
         /**
-         * Searches for an element that matches the conditions defined by the specified callable, and returns the first occurrence within the entire ArrayList.
-         *
-         * @param  callable $callable The callable that defines the conditions of the element to search for.
-         * @return mixed The first element that matches the conditions defined by the specified predicate, if found; otherwise, null.
-         */
-        public function find( $callable ) {
-            if( !is_callable( $callable ) ) {
-                throw new Exception( 'The value passed must be callable.' );
-            }
-
-            $tmp = array_filter( $this->_items, $callable );
-            if( count( $tmp ) > 0 ) {
-                return $tmp[0];
-            }
-            else {
-                return null;
-            }
-        }
-
-        /**
-         * Retrieves all the elements that match the conditions defined by the specified callable.
-         *
-         * @param  callable $callable The callable that defines the conditions of the elements to search for.
-         * @return ArrayList A ArrayList containing all the elements that match the conditions defined by the specified callable, if found; otherwise, an empty ArrayList.
-         */
-        public function findAll( $callable ) {
-            if( !is_callable( $callable ) ) {
-                throw new Exception( 'The value passed must be callable.' );
-            }
-
-            $ar = array_filter( $this->_items, $callable );
-
-            return new ArrayList( $ar );
-        }
-
-        /**
-         * Searches for an element that matches the conditions defined by the specified callable, and returns the zero-based index of the first occurrence within the entire ArrayList.
+         * Searches for an element that matches the conditions defined by the specified callable,
+         * and returns the zero-based index of the first occurrence within the entire ArrayList.
          *
          * @param  callable $callable The callable that defines the conditions of the element to search for.
          * @return int The zero-based index of the first occurrence of an element that matches the conditions defined by the callable, if found; otherwise, –1.
          */
         public function findIndex( $callable ) {
             if( !is_callable( $callable ) ) {
-                throw new Exception( 'The value passed must be callable.' );
+                throw new \Exception( 'The value passed must be callable.' );
             }
 
             $tmp = array_filter( $this->_items, $callable );
@@ -143,27 +108,6 @@
             }
             else {
                 return -1;
-            }
-        }
-
-        /**
-         * Searches for an element that matches the conditions defined by the specified callable, and returns the last occurrence within the entire ArrayList.
-         *
-         * @param  callable $callable The callable that defines the conditions of the element to search for.
-         * @return mixed The last element that matches the conditions defined by the specified callable, if found; otherwise, null.
-         */
-        public function findLast( $callable ) {
-            if( !is_callable( $callable ) ) {
-                throw new Exception( 'The value passed must be callable.' );
-            }
-
-            $tmp = array_filter( $this->_items, $callable );
-            if( count( $tmp ) > 0 ) {
-                array_reverse( $tmp );
-                return $tmp[0];
-            }
-            else {
-                return null;
             }
         }
 
@@ -176,27 +120,19 @@
          */
         public function findLastIndex( $callable ) {
             if( !is_callable( $callable ) ) {
-                throw new Exception( 'The value passed must be callable.' );
+                throw new \Exception( 'The value passed must be callable.' );
             }
 
             $tmp = array_filter( $this->_items, $callable );
             if( count( $tmp ) > 0 ) {
-                array_reverse( $tmp, true );
+                $tmp = array_reverse( $tmp, true );
                 reset( $tmp );
+
                 return key( $tmp );
             }
             else {
                 return -1;
             }
-        }
-
-        /**
-         * Returns the first element of the ArrayList.
-         *
-         * @return mixed The first element in the ArrayList.
-         */
-        public function first() {
-            return count( $this->_items ) > 0 ? reset( $this->_items ) : null;
         }
 
         /**
@@ -223,15 +159,6 @@
         }
 
         /**
-         * Returns the last element of the ArrayList.
-         *
-         * @return mixed The value at the last position in the ArrayList.
-         */
-        public function last() {
-            return count( $this->_items ) > 0 ? end( $this->_items ) : null;
-        }
-
-        /**
          * Searches for the specified object and returns the zero-based index of the last occurrence within the entire ArrayList.
          *
          * @param  mixed $value The value to locate in the ArrayList.
@@ -239,7 +166,7 @@
          */
         public function lastIndexOf( $value ) {
             $tmp = array_reverse( $this->_items, true );
-            $findex = array_search( $value );
+            $findex = array_search( $value, $this->_items );
             return $findex !== false ? $findex : -1;
         }
 
@@ -251,7 +178,7 @@
         public function max() {
             foreach( $this->_items as $i ) {
                 if( !is_numeric( $i ) ) {
-                    throw new Exception( 'The values of the ArrayList must all be numeric' );
+                    throw new \Exception( 'The values of the ArrayList must all be numeric' );
                 }
 
                 if( !isset( $result ) ) {
@@ -275,7 +202,7 @@
         public function min() {
             foreach( $this->_items as $i ) {
                 if( !is_numeric( $i ) ) {
-                    throw new Exception( 'The values of the ArrayList must all be numeric' );
+                    throw new \Exception( 'The values of the ArrayList must all be numeric' );
                 }
 
                 if( !isset( $result ) ) {
@@ -291,56 +218,7 @@
             return $result;
         }
 
-        /**
-         * Removes the first occurrence of a specific object from the ArrayList.
-         *
-         * @param  mixed $value The value to remove from the ArrayList.
-         * @return bool true if item is successfully removed; otherwise, false.
-         */
-        public function remove( $value ) {
-            $index = $this->indexOf( $value );
-            if( $index !== -1 ) {
-                $this->removeAt( $index );
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-        /**
-         * Removes all the elements that match the conditions defined by the specified callable.
-         *
-         * @param  callable $callable The callable that defines the conditions of the elements to remove.
-         * @return int The number of elements removed from the ArrayList.
-         */
-        public function removeAll( $callable ) {
-            if( !is_callable( $callable ) ) {
-                throw new Exception( 'The value passed must be callable.' );
-            }
-
-            $ar = array();
-
-            foreach( $this->_items as $item ) {
-                $tmp = $callable( $item );
-
-                if( !is_bool( $tmp ) ) {
-                    throw new Exception( 'The callback must return a boolean.' );
-                }
-
-                if( $tmp ) {
-                    $ar[] = $item;
-                }
-            }
-
-            $result = count( $ar );
-
-            foreach( $ar as $a ) {
-                $this->remove( $a );
-            }
-
-            return $result;
-        }
+        // public function orderBy( $callable ) {  }
 
         /**
          * Removes the element at the specified index of the ArrayList.
@@ -350,15 +228,17 @@
          */
         public function removeAt( $index ) {
             if( !is_int( $index ) ) {
-                throw new Excetption( 'The value of index must be an int' );
+                throw new \Exception( 'The value of index must be an int' );
             }
 
             if( $index > count( $this->_items ) - 1 ) {
-                throw new Exception( 'Index out of range.' );
+                throw new \Exception( 'Index out of range.' );
             }
 
             unset( $this->_items[$index] );
             $this->_items = array_values( $this->_items );
+
+            return $this;
         }
 
         /**
@@ -370,11 +250,11 @@
          */
         public function removeRange( $index, $count ) {
             if( !is_int( $index ) ) {
-                throw new Excetption( 'The value of index must be an int' );
+                throw new \Exception( 'The value of index must be an int' );
             }
 
             if( $index > count( $this->_items ) - 1 ) {
-                throw new Exception( 'Index out of range.' );
+                throw new \Exception( 'Index out of range.' );
             }
 
             for( $i = $index; $i < $index + $count; $i++ ) {
@@ -414,7 +294,7 @@
          */
         public function skipWhile( $callable ) {
             // if( !is_callable( $callable ) ) {
-                // throw new Exception( 'The value passed must be callable.' );
+                // throw new \Exception( 'The value passed must be callable.' );
             // }
 
             // $last = 0;
@@ -462,7 +342,7 @@
             $result = 0;
             foreach( $this->_items as $i ) {
                 if( !is_numeric( $i ) ) {
-                    throw new Exception( 'The values of the ArrayList must all be numeric' );
+                    throw new \Exception( 'The values of the ArrayList must all be numeric' );
                 }
 
                 $result += $i;
@@ -492,78 +372,12 @@
         }
 
         /**
-         * Copies the elements of the ArrayList to a new array.
-         *
-         * @return array An array containing copies of the elements of the ArrayList.
-         */
-        public function toArray() {
-            return $this->_items;
-        }
-
-        /**
          * Returns a string that represents the current ArrayList.
          *
          * @return string A string that represents the current ArrayList.
          */
         public function toString() {
             return implode( ',', $this->_items );
-        }
-
-        // IteratorAggregate  Interface method implementations
-
-        /**
-         * Retrieve an external iterator for the items.
-         *
-         * @return ArrayIterator An instance of an object implementing Iterator or Traversable.
-         */
-        public function getIterator() {
-            return new ArrayIterator( $this->_items );
-        }
-
-        // ArrayAccess Interface method implementations
-
-        /**
-         * Whether or not an index exists.
-         *
-         * @param  int $index The zero-based index to check for.
-         * @return bool true if the ArrayList contains the key; otherwise, false.
-         */
-        public function offsetExists( $index ) {
-            return array_key_exists( $index, $this->_items );
-        }
-
-        /**
-         * Get an item at a given index.
-         *
-         * @param  int $index The zero-based index to get the element from.
-         * @return mixed The element at the specified index.
-         */
-        public function offsetGet( $index ) {
-            return $this->_items[ $index ];
-        }
-
-        /**
-         * Assigns a value to the specified index.
-         *
-         * @param  int $index The zero-based index to assign the value to.
-         * @param  mixed $value The value to assign.
-         */
-        public function offsetSet( $index, $value ) {
-            if( is_null( $key ) ) {
-                $this->_items[] = $value;
-            }
-            else {
-                $this->_items[$key] = $value;
-            }
-        }
-
-        /**
-         * Unset the item at a given index.
-         *
-         * @param int $index The zero-based index to unset the value of.
-         */
-        public function offsetUnset( $index ) {
-            unset( $this->_items[$index] );
         }
 
         /**

@@ -11,14 +11,14 @@
          * @param  array $values An associative array of values to start with.
          */
         public function __construct( $values = null ) {
-            $this->_type = 'Dictionary';
+            $this->_type = '\PhpDotNet\Collection\Dictionary';
 
             if( !is_array( $values ) && $values !== null ) {
-                throw new Exception( 'values must be an array or null' );
+                throw new \Exception( 'values must be an array or null' );
             }
 
             if( !is_null( $values ) ) {
-                foreach( (array)$array as $k => $v ) {
+                foreach( (array)$values as $k => $v ) {
                     $this->_items[$k] = $v;
                 }
             }
@@ -31,19 +31,19 @@
          */
         public function add( $kvp ) {
             if( empty( $kvp ) ) {
-                throw new Exception( 'Argument exception' );
+                throw new \Exception( 'Argument exception' );
             }
 
-            foreach( (array)$kvp as $key -> $val ) {
+            foreach( (array)$kvp as $key => $val ) {
                 if( $key == null ) {
-                    throw new Exception( 'key is null' );
+                    throw new \Exception( 'key is null' );
                 }
 
                 if( isset( $this->_items[$key] ) ) {
-                    throw new Exception( "An element with the same key ($key) already exists in the Dictionary" );
+                    throw new \Exception( "An element with the same key ($key) already exists in the Dictionary" );
                 }
 
-                $this->_items[$key] = $value;
+                $this->_items[$key] = $val;
             }
         }
 
@@ -68,6 +68,18 @@
         }
 
         /**
+         * Inserts an element into the Dictionary after the specified key.
+         *
+         * @param  int $key The Dictionary key after which 'value' should be inserted.
+         * @param  mixed $value The value to insert.
+         * @return Dictionary The current Dictionary.
+         */
+        public function insert( $key, $value ) {
+            array_splice( $this->_items, $key, 0, $value );
+            return $this;
+        }
+
+        /**
          * Gets a collection containing the keys in the Dictionary
          *
          * @return ArrayList A ArrayList containing the keys in the Dictionary.
@@ -76,13 +88,29 @@
             return new ArrayList( array_keys( $this->_items ) );
         }
 
+        // public function orderBy( $callable ) {  }
+
+        /**
+         * Removes and item from the Dictionary using the key.
+         *
+         * @param  mixed $key The key for the item to remove from the Dictionary.
+         * @return Dictionary the current Dictionary.
+         */
+        public function removeByKey( $key ) {
+            if( array_key_exists( $key, $this->_items ) ) {
+                unset( $this->_items[$key] );
+            }
+
+            return $this;
+        }
+
         /**
          * Bypasses a specified number of elements in the Dictionary and then returns the remaining elements.
          *
          * @param  int $count The number of elements to skip before returning the remaining elements.
          * @return Dictionary  A new Dictionary that contains the elements that occur after the specified index in this Dictionary.
          */
-        public function skip( $int ) {
+        public function skip( $count ) {
             return $this->skipBase( $count, true );
         }
 
@@ -125,36 +153,6 @@
             return new ArrayList( array_values( $this->_items ) );
         }
 
-
-
-        public function first() {
-
-        }
-
-        public function last() {
-
-        }
-
-        public function orderBy( $callable ) {
-
-        }
-
-        public function remove( $key ) {
-
-        }
-
-        public function item( $index ) {
-
-        }
-
-        public function isEmpty() {
-
-        }
-
-        public function insertAt( $index, $value ) {
-
-        }
-
         /**
          * Returns a string that represents the current Dictionary.
          *
@@ -167,5 +165,14 @@
             }
 
             return implode( ',', $tmp );
+        }
+
+        /**
+         * Returns a string that represents the current ArrayList.
+         *
+         * @return string A string that represents the current ArrayList.
+         */
+        public function __toString() {
+            return $this->toString();
         }
     }

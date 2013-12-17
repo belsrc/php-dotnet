@@ -1,7 +1,7 @@
 {
     "name": "belsrc/php.net",
     "description": ".Net like methods and classes in PHP",
-    "license": "BSD 3 Clause",
+    "license": "BSD-3-Clause",
     "keywords": [".net", "collection", "list", "dictionary", "string"],
     "authors": [
         {
@@ -22,8 +22,8 @@
     "autoload": {
         "classmap": [
             "src",
-            "src/Collection",
             "src/String",
+            "src/Collection",
             "tests"
         ]
     },

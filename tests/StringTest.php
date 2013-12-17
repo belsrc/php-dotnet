@@ -2,6 +2,8 @@
 
     use \PhpDotNet\Str\Str;
 
+    require_once 'vendor/autoload.php';
+
     class StringTest extends PHPUnit_Framework_TestCase {
 
         protected $test;

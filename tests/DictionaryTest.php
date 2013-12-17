@@ -2,6 +2,8 @@
 
     use \PhpDotNet\Collection;
 
+    require_once 'vendor/autoload.php';
+
     class DictionaryTest extends PHPUnit_Framework_TestCase {
 
         private $test;
@@ -9,7 +11,7 @@
         // Since this doesn't seem to run for me on each test I'll just
         // call it at the start of each.
         protected function setUp() {
-            $this->test = new Dictionary\Dictionary( array(
+            $this->test = new Collection\Dictionary( array(
                 'Alpha'   => 'Omega',
                 'Beta'    => 'Psi',
                 'Gamma'   => 'Chi',
@@ -23,7 +25,7 @@
          */
         public function testAdd() {
             $this->setUp();
-            $expected = new Dictionary\Dictionary( array(
+            $expected = new Collection\Dictionary( array(
                 'Alpha'   => 'Omega',
                 'Beta'    => 'Psi',
                 'Gamma'   => 'Chi',
@@ -31,7 +33,7 @@
                 'Epsilon' => 'Upsilon',
                 'Zeta'    => 'Tau',
             ) );
-            $this->test->add( array( 'Zeta' => 'Tau', ) );
+            $this->test->add( array( 'Zeta' => 'Tau' ) );
             $msg = "Failed asserting $expected is " . $this->test;
             $this->assertTrue( $expected == $this->test, $msg );
         }
@@ -74,7 +76,7 @@
         public function testKeys() {
             $this->setUp();
             $this->setUp();
-            $expected = new ArrayList\ArrayList( array(
+            $expected = new Collection\ArrayList( array(
                 'Alpha',
                 'Beta',
                 'Gamma',
@@ -91,7 +93,7 @@
          */
         public function testSkip() {
             $this->setUp();
-            $expected = new Dictionary\Dictionary( array(,
+            $expected = new Collection\Dictionary( array(
                 'Delta'   => 'Phi',
                 'Epsilon' => 'Upsilon',
             ) );
@@ -105,12 +107,11 @@
          */
         public function testSkipWhile() {
             $this->setUp();
-            $expected = new Dictionary\Dictionary( array(
-                'Alpha'   => 'Omega',
-                'Beta'    => 'Psi',
-                'Gamma'   => 'Chi',
+            $expected = new Collection\Dictionary( array(
+                'Delta'   => 'Phi',
+                'Epsilon' => 'Upsilon',
             ) );
-            $actual = $this->skipWhile( function( $ele ) {
+            $actual = $this->test->skipWhile( function( $element ) {
                 return $element !== 'Phi';
             } );
             $msg = "Failed asserting $expected is $actual";
@@ -122,7 +123,7 @@
          */
         public function testTake() {
             $this->setUp();
-            $expected = new Dictionary\Dictionary( array(
+            $expected = new Collection\Dictionary( array(
                 'Alpha'   => 'Omega',
                 'Beta'    => 'Psi',
                 'Gamma'   => 'Chi',
@@ -137,7 +138,7 @@
          */
         public function testTakeWhile() {
             $this->setUp();
-            $expected = new Dictionary\Dictionary( array(
+            $expected = new Collection\Dictionary( array(
                 'Alpha'   => 'Omega',
                 'Beta'    => 'Psi',
                 'Gamma'   => 'Chi',
@@ -154,7 +155,7 @@
          */
         public function testValues() {
             $this->setUp();
-            $expected = new ArrayList\ArrayList( array(
+            $expected = new Collection\ArrayList( array(
                 'Omega',
                 'Psi',
                 'Chi',
