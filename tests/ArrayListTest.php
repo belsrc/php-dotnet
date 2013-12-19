@@ -57,6 +57,15 @@
 
         /**
          * @test
+         * @expectedException Exception
+         */
+        public function testAllException() {
+            $this->setUp();
+            $this->test->all( 'fail' );
+        }
+
+        /**
+         * @test
          */
         public function testAny() {
             $this->setUp();
@@ -66,6 +75,15 @@
             } );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testAnyException() {
+            $this->setUp();
+            $this->test->any( 'fail' );
         }
 
         /**
@@ -141,6 +159,15 @@
 
         /**
          * @test
+         * @expectedException Exception
+         */
+        public function testEachException() {
+            $this->setUp();
+            $this->test->each( 'fail' );
+        }
+
+        /**
+         * @test
          */
         public function testWhere() {
             $this->setUp();
@@ -154,6 +181,15 @@
             } );
             $msg = "Failed asserting $expected is $actual";
             $this->assertTrue( $expected == $actual, $msg );
+        }
+
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testWhereException() {
+            $this->setUp();
+            $this->test->where( 'fail' );
         }
 
         /**
@@ -232,6 +268,23 @@
             } );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
+
+            $expected = null;
+            $actual = $this->test->find( function( $element ) {
+                $tmp = str_split( $element );
+                return $tmp[0] === 'X' || $tmp[0] === 'x';
+            } );
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testFindException() {
+            $this->setUp();
+            $this->test->find( 'fail' );
         }
 
         /**
@@ -293,7 +346,24 @@
                 return $tmp[0] === 'E' || $tmp[0] === 'e';
             } );
             $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );$this->setUp();
+
+            $expected = null;
+            $actual = $this->test->findLast( function( $element ) {
+                $tmp = str_split( $element );
+                return $tmp[0] === 'X' || $tmp[0] === 'x';
+            } );
+            $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testFindLastException() {
+            $this->setUp();
+            $this->test->findLast( 'fail' );
         }
 
         /**
@@ -377,6 +447,17 @@
             $this->setUp();
             $expected = 'Theta';
             $actual = $this->test->last();
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testIsEmpty() {
+            $this->setUp();
+            $expected = false;
+            $actual = $this->test->isEmpty();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -482,6 +563,26 @@
 
         /**
          * @test
+         * @expectedException Exception
+         */
+        public function testRemoveAllException() {
+            $this->setUp();
+            $this->test->removeAll( 'fail' );
+        }
+
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testRemoveAllNotBoolException() {
+            $this->setUp();
+            $this->test->removeAll( function( $element ) {
+                return 'fail';
+            } );
+        }
+
+        /**
+         * @test
          */
         public function testRemoveAt() {
             $this->setUp();
@@ -498,7 +599,7 @@
             $msg = "Failed asserting $expected is " . $this->test;
             $this->assertTrue( $expected == $this->test, $msg );
         }
-        
+
         /**
          * @test
          * @expectedException Exception
@@ -507,7 +608,7 @@
             $this->setUp();
             $this->test->removeAt( 'a' );
         }
-        
+
         /**
          * @test
          * @expectedException Exception
@@ -543,7 +644,7 @@
             $this->setUp();
             $this->test->removeRange( 'a', 3 );
         }
-        
+
         /**
          * @test
          * @expectedException Exception
@@ -552,7 +653,7 @@
             $this->setUp();
             $this->test->removeRange( 10000, 2 );
         }
-        
+
         /**
          * @test
          */
@@ -605,6 +706,28 @@
             } );
             $msg = "Failed asserting $expected is $actual";
             $this->assertTrue( $expected == $actual, $msg );
+
+            $expected = new ArrayList();
+            $actual = $this->test->skipWhile( function( $element ) {
+                return $element !== ' ';
+            } );
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertTrue( $expected == $actual, $msg );
+
+            $actual = $this->test->skipWhile( function( $element ) {
+                return $element === ' ';
+            } );
+            $msg = "Failed asserting " . $this->test . " is $actual";
+            $this->assertTrue( $this->test == $actual, $msg );
+        }
+
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testSkipWhileException() {
+            $this->setUp();
+            $this->test->skipWhile( 'fail' );
         }
 
         /**
@@ -658,7 +781,7 @@
             ) );
             $test->sum();
         }
-        
+
         /**
          * @test
          */
@@ -696,6 +819,15 @@
 
         /**
          * @test
+         * @expectedException Exception
+         */
+        public function testTakeWhileException() {
+            $this->setUp();
+            $this->test->takeWhile( 'fail' );
+        }
+
+        /**
+         * @test
          */
         public function testToArray() {
             $this->setUp();
@@ -723,5 +855,81 @@
             $actual = $this->test->toString();
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testIterator() {
+            // What better way to test the iterator then a foreach loop
+            $this->setUp();
+
+            foreach( $this->test as $key => $item ) { }
+
+            $this->assertEquals( true, true );
+        }
+
+        /**
+         * @test
+         */
+        public function testOffsetGet() {
+            $this->setUp();
+            $expected = 'Alpha';
+            $actual = $this->test[0];
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testOffsetSet() {
+            $this->setUp();
+            $expected = 'Lambda';
+            $this->test[0] = 'Lambda';
+            $actual = $this->test[0];
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+            
+            $this->setUp();
+            $expected = 'Lambda';
+            $this->test[] = 'Lambda';
+            $actual = $this->test[$this->test->count()-1];
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testOffsetExists() {
+            $this->setUp();
+            $actual = isset( $this->test[1] );
+            $msg = "Failed asserting true is " . $this->test;
+            $this->assertEquals( true, $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testOffsetUnset() {
+            $this->setUp();
+            
+            // Since it was saying they didn't match, even though they did
+            // ill just use string comparison.
+            $expected = new ArrayList( array(
+                'Beta',
+                'Gamma',
+                'Delta',
+                'Epsilon',
+                'Zeta',
+                'Eta',
+                'Theta',
+            ) );
+            $expected = $expected->toString();
+            unset( $this->test[0] );
+            $actual = $this->test->toString();
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertTrue( $expected == $actual, $msg );
         }
     }

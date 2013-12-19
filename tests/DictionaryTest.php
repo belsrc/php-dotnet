@@ -22,6 +22,14 @@
 
         /**
          * @test
+         * @expectedException Exception
+         */
+        public function testConstructionException() {
+            $d = new Collection\Dictionary( 1 );
+        }
+        
+        /**
+         * @test
          */
         public function testAdd() {
             $this->setUp();
@@ -38,6 +46,33 @@
             $this->assertTrue( $expected == $this->test, $msg );
         }
 
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testAddEmptyException() {
+            $this->setUp();
+            $this->test->add( array() );
+        }
+        
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testAddNullKeyException() {
+            $this->setUp();
+            $this->test->add( array( null => 'Tau' ) );
+        }
+        
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testAddDupeKeyException() {
+            $this->setUp();
+            $this->test->add( array( 'Alpha' => 'Tau' ) );
+        }
+        
         /**
          * @test
          */
@@ -73,6 +108,42 @@
         /**
          * @test
          */
+        public function testInsert() {
+            $this->setUp();
+            $expected = new Collection\Dictionary( array(
+                'Alpha'   => 'Omega',
+                'Beta'    => 'Psi',
+                'Lambda'  => 'Pi',
+                'Gamma'   => 'Chi',
+                'Delta'   => 'Phi',
+                'Epsilon' => 'Upsilon',
+            ) );
+            $this->test->insert( 'Beta', array( 'Lambda' => 'Pi' ) );
+            $msg = "Failed asserting $expected is " . $this->test;
+            $this->assertEquals( $expected, $this->test, $msg );
+        }
+        
+        /**
+         * @test
+         */
+        public function testInsertNullKey() {
+            $this->setUp();
+            $expected = new Collection\Dictionary( array(
+                'Alpha'   => 'Omega',
+                'Beta'    => 'Psi',
+                'Gamma'   => 'Chi',
+                'Delta'   => 'Phi',
+                'Epsilon' => 'Upsilon',
+                'Lambda'  => 'Pi',
+            ) );
+            $this->test->insert( null, array( 'Lambda' => 'Pi' ) );
+            $msg = "Failed asserting $expected is " . $this->test;
+            $this->assertEquals( $expected, $this->test, $msg );
+        }
+        
+        /**
+         * @test
+         */
         public function testKeys() {
             $this->setUp();
             $this->setUp();
@@ -88,6 +159,22 @@
             $this->assertTrue( $expected == $actual, $msg );
         }
 
+        /**
+         * @test
+         */
+        public function testRemoveByKey() {
+            $this->setUp();
+            $expected = new Collection\Dictionary( array(
+                'Alpha'   => 'Omega',
+                'Beta'    => 'Psi',
+                'Delta'   => 'Phi',
+                'Epsilon' => 'Upsilon',
+            ) );
+            $this->test->removeByKey( 'Gamma' );
+            $msg = "Failed asserting $expected is " . $this->test;
+            $this->assertTrue( $expected == $this->test, $msg );
+        }
+        
         /**
          * @test
          */
@@ -149,7 +236,7 @@
             $msg = "Failed asserting $expected is $actual";
             $this->assertTrue( $expected == $actual, $msg );
         }
-
+        
         /**
          * @test
          */

@@ -154,7 +154,7 @@
          * @return bool true if the Collection contains any items, otherwise, false;
          */
         public function isEmpty() {
-            return count( $this->_items ) > 0;
+            return (bool)count( $this->_items ) === 0;
         }
 
         /**
@@ -250,30 +250,30 @@
             }
 
             $t = $this->_type;
-            $trash = $this->_items;
+            $keep = $this->_items;
             foreach( $this->_items as $k => $v ) {
                 $tmp = call_user_func( $callable, $v );
                 if( $tmp === true ) {
-                    unset( $trash[$k] );
+                    unset( $keep[$k] );
                 }
                 else {
                     break;
                 }
             }
 
-            // Not $trash only has the values after skip
-            if( count( $trash ) == 0 ) {
+            // Now $keep only has the values after skip
+            if( count( $keep ) == 0 ) {
                 return new $t();
             }
-            else if( count( $trash ) == $this->count() ) {
+            else if( count( $keep ) == $this->count() ) {
                 return $this;
             }
             else {
                 if( $keepKeys ) {
-                    return new $t( $trash );
+                    return new $t( $keep );
                 }
                 else {
-                    return new $t( array_values( $trash ) );
+                    return new $t( array_values( $keep ) );
                 }
             }
         }
@@ -360,7 +360,7 @@
          * @return ArrayIterator An instance of an object implementing Iterator or Traversable.
          */
         public function getIterator() {
-            return new ArrayIterator( $this->_items );
+            return new \ArrayIterator( $this->_items );
         }
 
         // ArrayAccess Interface method implementations
@@ -392,11 +392,11 @@
          * @param  mixed $value The value to assign.
          */
         public function offsetSet( $index, $value ) {
-            if( is_null( $key ) ) {
+            if( is_null( $index ) ) {
                 $this->_items[] = $value;
             }
             else {
-                $this->_items[$key] = $value;
+                $this->_items[$index] = $value;
             }
         }
 
