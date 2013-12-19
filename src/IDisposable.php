@@ -1,4 +1,4 @@
-<?php namespace PhpDotNet\IDisposable;
+<?php namespace PhpDotNet;
 
     /**
      * Defines methods for a disposable class.

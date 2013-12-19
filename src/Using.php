@@ -1,7 +1,5 @@
 <?php namespace PhpDotNet;
 
-    use PhpDotNet\IDisposable;
-
     /**
      * Implements the C# 'using' statement.
      * 
@@ -11,24 +9,18 @@
      * @param  IDisposable $input    An instance of an IDisposable class.
      * @param  callable    $callback The callable function to use with the input class.
      */
-    function using( IDisposable $input, callable $callback=null ) {
+    function using( IDisposable $input, $callback=null ) {
 
-        $disponser = function( $input ) {
-            if( $input instanceof IDisposable ) {
-                $input->dispose();
-            }
-            else {
-                $class = get_class( $input );
-                throw new Exception( "The class $class does not implement IDisposable." );
-            }
+        $disposer = function( $input ) {
+            $input->dispose();
         };
 
         try {
-            call_user_func_( $callback, $input );
-            $disponser( $input );
+            \call_user_func( $callback, $input );
+            $disposer( $input );
         }
-        catch( Exception $e ) {
-            $disponser( $input );
+        catch( \Exception $e ) {
+            $disposer( $input );
             throw $e;
         }
     }

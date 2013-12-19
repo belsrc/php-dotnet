@@ -22,6 +22,7 @@
         "sebastian/phpcpd": "dev-master"
     },
     "autoload": {
+        "files": ["src/Using.php"],
         "classmap": [
             "src",
             "src/String",
