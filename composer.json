@@ -2,6 +2,7 @@
     "name": "belsrc/php.net",
     "description": ".Net like methods and classes in PHP",
     "license": "BSD-3-Clause",
+    "homepage": "https://github.com/belsrc/PHP-dotNet",
     "keywords": [".net", "collection", "list", "dictionary", "string"],
     "authors": [
         {

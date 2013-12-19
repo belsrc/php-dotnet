@@ -74,8 +74,25 @@
          * @param  mixed $value The value to insert.
          * @return Dictionary The current Dictionary.
          */
-        public function insert( $key, $value ) {
-            array_splice( $this->_items, $key, 0, $value );
+        public function insert( $key = null, $value ) {
+            if( $key === null ) {
+                $this->add( $value );
+            }
+            else {
+                $offset = 0;
+
+                foreach( $this->_items as $k => $v ){
+                    $offset++;
+                    if( $k == $key ){
+                        break;
+                    }
+                }
+
+                $this->_items = array_slice( $this->_items, 0, $offset, true )
+                              + $value
+                              + array_slice( $this->_items, $offset, null, true );
+            }
+            
             return $this;
         }
 
