@@ -11,7 +11,7 @@
      * @param  IDisposable $input    An instance of an IDisposable class.
      * @param  callable    $callback The callable function to use with the input class.
      */
-    function using( $input, callable $callback=null ) {
+    function using( IDisposable $input, callable $callback=null ) {
 
         $disponser = function( $input ) {
             if( $input instanceof IDisposable ) {

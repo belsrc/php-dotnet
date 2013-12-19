@@ -1,9 +1,9 @@
 <?php namespace PhpDotNet;
 
-    class Cgum {
+    class General {
     
         // Strips the curly braces from a format tag.
-        private function stripTag( $tag ) {
+        private static function stripTag( $tag ) {
             $tag = str_replace( '{', '', $tag );
             $tag = str_replace( '}', '', $tag );
 
@@ -11,14 +11,14 @@
         }
         
         // Checks to make sure that the number of variables matches the number of format tags
-        private function checkMatches( $string, $count ) {
+        private static function checkMatches( $string, $count ) {
             $pattern = '/\{\d*\}/';
             $matches = array();
             preg_match_all( $pattern, $string, $matches );
             $matches = $matches[0];
 
             sort( $matches );
-            $highest = $this->stripTag( end( $matches ) );
+            $highest = self::stripTag( end( $matches ) );
 
             return $highest == $count;
         }
@@ -38,7 +38,7 @@
                 $array,
                 function( $element ) {
                     if( is_array( $element ) ) {
-                        return !$this->isArrayEmpty( $element );
+                        return !self::isArrayEmpty( $element );
                     }
 
                     return !empty( $element );
@@ -58,8 +58,8 @@
         public static function stringFormat( $format, $args ) {
             $args = (array)$args;
 
-            if( !checkMatches( $format, count( $args ) - 1 ) ) {
-                throw new Exception( 'There must be the same number of format tags as supplied values.' );
+            if( !self::checkMatches( $format, count( $args ) - 1 ) ) {
+                throw new \Exception( 'There must be the same number of format tags as supplied values.' );
             }
 
             for( $i = 0; $i < count( $args ); $i++ ) {
