@@ -3,9 +3,10 @@
     /**
      * Class for modeling a string as an object.
      */
-    class Str {
+    class Str implements \ArrayAccess, \IteratorAggregate {
 
         protected $_base = null;
+        protected $_chars;
 
         /**
          * Initializes a new instance of the String class.
@@ -15,6 +16,7 @@
         public function __construct( $str = null ) {
             if( !is_null( $str ) ) {
                 $this->_base = (string)$str;
+                $this->_chars = str_split( $str );
             }
         }
 
@@ -76,7 +78,7 @@
          * @return int The number of characters in this string.
          */
         public function length() {
-            return mb_strlen( $this->_base );
+            return count( $this->_chars );
         }
 
         /**
@@ -271,7 +273,7 @@
             $pattern = array( '/(é|è|ë|ê)/', '/(ó|ò|ö|ô)/', '/(ú|ù|ü|û)/' );
             $replacements = array( 'e', 'o', 'u' );
             $value = preg_replace( $pattern, $replacements, $value );
-            
+
             $value = preg_replace( "/[:!?\.\/']+/", '', $value );
 
             $pattern = array( '/[^a-z0-9-]/', '/-+/' );
@@ -311,6 +313,66 @@
          */
         public function trimEnd( $charList = null ) {
             return rtrim( $this->_base, $charList );
+        }
+
+        // IteratorAggregate  Interface method implementations
+
+        /**
+         * Retrieve an external iterator for the items.
+         *
+         * @return ArrayIterator An instance of an object implementing Iterator or Traversable.
+         */
+        public function getIterator() {
+            return new \ArrayIterator( $this->_chars );
+        }
+
+        // ArrayAccess Interface method implementations
+
+        /**
+         * Whether or not an index exists.
+         *
+         * @param  int $index The zero-based index to check for.
+         * @return bool true if the ArrayList contains the key; otherwise, false.
+         */
+        public function offsetExists( $index ) {
+            return array_key_exists( $index, $this->_chars );
+        }
+
+        /**
+         * Get an item at a given index.
+         *
+         * @param  int $index The zero-based index to get the element from.
+         * @return mixed The element at the specified index.
+         */
+        public function offsetGet( $index ) {
+            return $this->_chars[ $index ];
+        }
+
+        /**
+         * Assigns a value to the specified index.
+         *
+         * @param  int $index The zero-based index to assign the value to.
+         * @param  mixed $value The value to assign.
+         */
+        public function offsetSet( $index, $value ) {
+            if( is_null( $index ) ) {
+                $this->_chars[] = $value;
+            }
+            else {
+                $this->_chars[$index] = $value;
+            }
+
+            $this->_base = implode( '', $this->_chars );
+        }
+
+        /**
+         * Unset the item at a given index.
+         *
+         * @param int $index The zero-based index to unset the value of.
+         */
+        public function offsetUnset( $index ) {
+            unset( $this->_chars[$index] );
+            $this->_base = implode( '', $this->_chars );
         }
 
         /**

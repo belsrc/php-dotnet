@@ -317,4 +317,71 @@
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
+        
+        /**
+         * @test
+         */
+        public function testIterator() {
+            // What better way to test the iterator then a foreach loop
+            $this->setUp();
+
+            foreach( $this->test as $char ) { }
+
+            $this->assertEquals( true, true );
+        }
+
+        /**
+         * @test
+         */
+        public function testOffsetGet() {
+            $this->setUp();
+            $expected = 'T';
+            $actual = $this->test[0];
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testOffsetSet() {
+            $this->setUp();
+            $expected = 'B';
+            $this->test[0] = 'B';
+            $actual = $this->test[0];
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+            
+            $this->setUp();
+            $expected = 'This is a test string test string!';
+            $this->test[] = '!';
+            $actual = $this->test;
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testOffsetExists() {
+            $this->setUp();
+            $actual = isset( $this->test[1] );
+            $msg = "Failed asserting true is " . $this->test;
+            $this->assertEquals( true, $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testOffsetUnset() {
+            $this->setUp();
+            
+            // Since it was saying they didn't match, even though they did
+            // ill just use string comparison.
+            $expected = new Str( 'his is a test string test string' );
+            unset( $this->test[0] );
+            $actual = (string)$this->test;
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertTrue( (string)$expected == $actual, $msg );
+        }
     }
