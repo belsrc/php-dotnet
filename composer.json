@@ -15,7 +15,7 @@
       "issues": "https://github.com/belsrc/PHP-dotNet/issues"
     },
     "require": {
-        "php": ">=5.1.0"
+        "php": ">=5.4"
     },
     "require-dev": {
         "phpunit/phpunit": "3.8.*",
