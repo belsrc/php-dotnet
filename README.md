@@ -5,6 +5,65 @@ PHP-dotNet
 
 PHP .Net like wrapper classes
 
+```php
+    use \PhpDotNet\Collection\ArrayList;
+    use \PhpDotNet\Collection\Dictionary;
+    require 'vendor/autoload.php';
+    
+    $list = new ArrayList( array(
+        'Alpha',
+        'Beta',
+        'Gamma',
+        'Delta',
+        'Epsilon',
+        'Zeta',
+        'Eta',
+        'Theta',
+    ) );
+    
+    echo $list;
+    
+    // Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta
+    
+    foreach( $list as $item ) {
+        echo "$item</br>";
+    }
+    
+    /*
+        Alpha
+        Beta
+        Gamma
+        Delta
+        Epsilon
+        Zeta
+        Eta
+        Theta
+    */
+   
+    $dictionary = new Dictionary( array(
+        'Alpha'   => 'Omega',
+        'Beta'    => 'Psi',
+        'Gamma'   => 'Chi',
+        'Delta'   => 'Phi',
+        'Epsilon' => 'Upsilon',
+    ) );
+    
+    echo $dictionary;
+    
+    // Alpha=>Omega,Beta=>Psi,Gamma=>Chi,Delta=>Phi,Epsilon=>Upsilon
+    
+    foreach( $dictionary as $key => $val ) {
+        echo "$key -> $val</br>";
+    }
+    
+    /*
+        Alpha -> Omega
+        Beta -> Psi
+        Gamma -> Chi
+        Delta -> Phi
+        Epsilon -> Upsilon
+    */
+```
 
 ## License ##
 PHP-dotNet is released under a BSD 3-Clause License
