@@ -7,7 +7,7 @@ PHP .Net like wrapper classes
 
 
 ## License ##
-ModernUIControls is released under a BSD 3-Clause License
+PHP-dotNet is released under a BSD 3-Clause License
 
 Copyright &copy; 2012-2013, Bryan Kizer
 All rights reserved. 
