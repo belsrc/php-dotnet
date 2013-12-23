@@ -1,5 +1,14 @@
 <?php namespace PhpDotNet;
 
+    /**
+     * 
+     * 
+     * @package    PhpDotNet
+     * @author     Bryan Kizer 
+     * @copyright  2013
+     * @license    http://choosealicense.com/licenses/bsd-3-clause/ BSD 3-Clause
+     * @link       https://github.com/belsrc/PHP-dotNet
+     */
     class General {
     
         // Strips the curly braces from a format tag.

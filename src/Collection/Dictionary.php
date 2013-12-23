@@ -2,6 +2,12 @@
 
     /**
      * Class for modeling a Dictionary object.
+     *
+     * @package    PhpDotNet
+     * @author     Bryan Kizer
+     * @copyright  2013
+     * @license    http://choosealicense.com/licenses/bsd-3-clause/ BSD 3-Clause
+     * @link       https://github.com/belsrc/PHP-dotNet
      */
     class Dictionary extends Collection {
 
@@ -92,7 +98,7 @@
                               + $value
                               + array_slice( $this->_items, $offset, null, true );
             }
-            
+
             return $this;
         }
 

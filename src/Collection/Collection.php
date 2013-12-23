@@ -2,6 +2,12 @@
 
     /**
      * The base class of all Collections.
+     *
+     * @package    PhpDotNet
+     * @author     Bryan Kizer
+     * @copyright  2013
+     * @license    http://choosealicense.com/licenses/bsd-3-clause/ BSD 3-Clause
+     * @link       https://github.com/belsrc/PHP-dotNet
      */
     abstract class Collection implements ICollection {
 
