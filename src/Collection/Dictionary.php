@@ -15,6 +15,7 @@
          * Initializes a new instance of the Dictionary class.
          *
          * @param  array $values An associative array of values to start with.
+         * @return Dictionary Returns a new instance of the Dictionary class.
          */
         public function __construct( $values = null ) {
             $this->_type = '\PhpDotNet\Collection\Dictionary';
@@ -34,23 +35,22 @@
          * Adds the specified key and value to the dictionary.
          *
          * @param  array $kvp The key value pair to add to the dictionary.
+         * @return Dictionary Returns the current Dictionary.
          */
         public function add( $kvp ) {
-            if( empty( $kvp ) ) {
+            if( empty( $kvp ) || !is_array( $kvp ) ) {
                 throw new \Exception( 'Argument exception' );
             }
 
             foreach( (array)$kvp as $key => $val ) {
-                if( $key == null ) {
-                    throw new \Exception( 'key is null' );
-                }
-
                 if( isset( $this->_items[$key] ) ) {
                     throw new \Exception( "An element with the same key ($key) already exists in the Dictionary" );
                 }
 
                 $this->_items[$key] = $val;
             }
+
+            return $this;
         }
 
         /**
@@ -76,7 +76,7 @@
         /**
          * Inserts an element into the Dictionary after the specified key.
          *
-         * @param  int $key The Dictionary key after which 'value' should be inserted.
+         * @param  mixed $key The Dictionary key after which 'value' should be inserted.
          * @param  mixed $value The value to insert.
          * @return Dictionary The current Dictionary.
          */
@@ -105,7 +105,7 @@
         /**
          * Gets a collection containing the keys in the Dictionary
          *
-         * @return ArrayList A ArrayList containing the keys in the Dictionary.
+         * @return ArrayList An ArrayList containing the keys in the Dictionary.
          */
         public function keys() {
             return new ArrayList( array_keys( $this->_items ) );
@@ -114,10 +114,10 @@
         // public function orderBy( $callable ) {  }
 
         /**
-         * Removes and item from the Dictionary using the key.
+         * Removes an item from the Dictionary using the key.
          *
          * @param  mixed $key The key for the item to remove from the Dictionary.
-         * @return Dictionary the current Dictionary.
+         * @return Dictionary Returns the current Dictionary.
          */
         public function removeByKey( $key ) {
             if( array_key_exists( $key, $this->_items ) ) {
@@ -191,9 +191,9 @@
         }
 
         /**
-         * Returns a string that represents the current ArrayList.
+         * Returns a string that represents the current Dictionary.
          *
-         * @return string A string that represents the current ArrayList.
+         * @return string A string that represents the current Dictionary.
          */
         public function __toString() {
             return $this->toString();

@@ -14,10 +14,11 @@
         /**
          * Initializes a new instance of the ArrayList class.
          *
-         * Note: If $array is not an array, it will be typecast to one (i.e. (array) $parameter).
+         * Note: If $array is not an array, it will be typecast to one [i.e. (array) $parameter].
          * This may result in unexpected behavior when using an object or NULL replacement.
          *
-         * @param string|array $array The initial values to add to the collection.
+         * @param  string|array $array The initial values to add to the collection.
+         * @return ArrayList Returns a new instance of the ArrayList class.
          */
         public function __construct( $array = null ) {
             $this->_type = '\PhpDotNet\Collection\ArrayList';
@@ -30,13 +31,13 @@
         }
 
         /**
-         * Adds a(n) item(s) to the end of the ArrayList.
+         * Adds an item(s) to the end of the ArrayList.
          *
-         * Note: If $array is not an array, it will be typecast to one (i.e. (array) $parameter).
+         * Note: If $array is not an array, it will be typecast to one (i.e. (array)$parameter).
          * This may result in unexpected behavior when using an object or NULL replacement.
          *
-         * @param  string|array $mixed The value(s) to be added to the end of the
-         * @return ArrayList the current ArrayList.
+         * @param  mixed $mixed The value(s) to be added to the end of the
+         * @return ArrayList Returns the current ArrayList.
          */
         public function add( $array ) {
             foreach( (array)$array as $a ) {
@@ -203,7 +204,7 @@
         /**
          * Returns the minimum value in the ArrayList of numeric values.
          *
-         * @return The minimum value in the ArrayList.
+         * @return numeric The minimum value in the ArrayList.
          */
         public function min() {
             foreach( $this->_items as $i ) {
@@ -273,13 +274,13 @@
         }
 
         /**
-         * Reverses the order of the elements in the entire ArrayList.
+         * Reverses the order of the elements in the ArrayList.
          *
-         * @return ArrayList The current ArrayList.
+         * @return ArrayList A new ArrayList whose elements correspond to those of this ArrayList in reverse order.
          */
         public function reverse() {
-            $this->_items = array_reverse( $this->_items );
-            return $this;
+            $tmp = array_reverse( $this->_items );
+            return new ArrayList( $tmp );
         }
 
         /**
@@ -299,32 +300,6 @@
          * @return ArrayList A ArrayList that contains the elements starting at the first element in the linear series that does not pass the test specified by predicate.
          */
         public function skipWhile( $callable ) {
-            // if( !is_callable( $callable ) ) {
-                // throw new \Exception( 'The value passed must be callable.' );
-            // }
-
-            // $last = 0;
-            // foreach( $this->_items as $key => $item ) {
-                // $tmp = call_user_func( $callable, $item );
-                // if( $tmp === true ) {
-                    // $last = $key;
-                // }
-                // else {
-                    // break;
-                // }
-            // }
-
-            // if( $last === 0 ) {
-                // return $this;
-            // }
-            // else {
-                // if( $last < count( $this->_items ) - 1 ) {
-                    // return $this->skip( $last + 1 );
-                // }
-                // else {
-                    // return new ArrayList();
-                // }
-            // }
             return $this->skipWhileBase( $callable, false );
         }
 

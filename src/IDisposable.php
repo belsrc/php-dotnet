@@ -10,5 +10,9 @@
      * @link       https://github.com/belsrc/PHP-dotNet
      */
     interface IDisposable {
+        
+        /**
+         * Performs tasks associated with freeing, releasing, or resetting resources.
+         */
         public function dispose();
     }

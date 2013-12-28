@@ -15,9 +15,10 @@
         protected $_chars;
 
         /**
-         * Initializes a new instance of the String class.
+         * Initializes a new instance of the Str class.
          *
          * @param  string $str The string value.
+         * @return Str    Returns a new instance of the Str class.
          */
         public function __construct( $str = null ) {
             if( !is_null( $str ) ) {
@@ -65,7 +66,7 @@
         /**
          * Determines whether the end of this string matches the specified value.
          *
-         * @param  string $value The string to compare to the substring at the end of the base string.
+         * @param  string $values The string to compare to the substring at the end of the base string.
          * @return bool   true if value matches the end of this string; otherwise, false.
          */
         public function endsWith( $values ) {
@@ -153,7 +154,7 @@
         /**
          * Determines whether the start of this string matches the specified value.
          *
-         * @param  string $value The string to compare to the substring at the start of the base string.
+         * @param  string $values The string to compare to the substring at the start of the base string.
          * @return bool   true if value matches the start of this string; otherwise, false.
          */
         public function startsWith( $values ) {
@@ -347,8 +348,8 @@
         /**
          * Get an item at a given index.
          *
-         * @param  int $index The zero-based index to get the element from.
-         * @return mixed The element at the specified index.
+         * @param  int  $index The zero-based index to get the element from.
+         * @return char The element at the specified index.
          */
         public function offsetGet( $index ) {
             return $this->_chars[ $index ];
@@ -357,8 +358,9 @@
         /**
          * Assigns a value to the specified index.
          *
-         * @param  int $index The zero-based index to assign the value to.
-         * @param  mixed $value The value to assign.
+         * @param  int  $index The zero-based index to assign the value to.
+         * @param  char $value The value to assign.
+         * @return void
          */
         public function offsetSet( $index, $value ) {
             if( is_null( $index ) ) {
@@ -374,7 +376,8 @@
         /**
          * Unset the item at a given index.
          *
-         * @param int $index The zero-based index to unset the value of.
+         * @param  int  $index The zero-based index to unset the value of.
+         * @return void
          */
         public function offsetUnset( $index ) {
             unset( $this->_chars[$index] );
@@ -382,9 +385,9 @@
         }
 
         /**
-         * Returns a string that represents the current object, or in this case, the value of _base.
+         * Returns a string that represents the current object.
          *
-         * @return string The value of _base.
+         * @return string The string representation of this object.
          */
         public function __toString() {
             return $this->_base;

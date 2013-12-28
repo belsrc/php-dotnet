@@ -59,9 +59,9 @@
          * @test
          * @expectedException Exception
          */
-        public function testAddNullKeyException() {
+        public function testAddArgException() {
             $this->setUp();
-            $this->test->add( array( null => 'Tau' ) );
+            $this->test->add( 'string' );
         }
         
         /**

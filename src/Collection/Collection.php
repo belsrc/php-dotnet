@@ -18,7 +18,7 @@
          * Determines whether all elements of the Collection satisfy a condition.
          *
          * @param  callable $callable A callable to test each element for a condition.
-         * @return bool true if every element of the source sequence passes the test in the specified callable, or if the sequence is empty; otherwise, false.
+         * @return bool true if every element of the sequence passes the test in the specified callable, or if the sequence is empty; otherwise, false.
          */
         public function all( $callable ) {
             if( !is_callable( $callable ) ) {
@@ -30,10 +30,10 @@
         }
 
         /**
-         * Determines whether the Collection contains any elements.
+         * Determines whether any elements of the Collection satisfy a condition.
          *
          * @param  callable $callable A callable to test each element for a condition.
-         * @return bool true if the Collection contains any elements; otherwise, false.
+         * @return bool true if any element of the sequence passes the test in the specified callable, or if the sequence is empty; otherwise, false.
          */
         public function any( $callable ) {
             if( !is_callable( $callable ) ) {
@@ -76,11 +76,11 @@
         }
 
         /**
-         * Performs the specified action on each element of the List.
+         * Performs the specified action on each element of the Collection.
          * Modifying the underlying collection in the body of the callable is not supported.
          *
-         * @param  callable $callable The callable to perform on each element of the List.
-         * @return List A copy of the source List after the foreach.
+         * @param  callable   $callable The callable to perform on each element of the List.
+         * @return Collection A copy of the source List after the for each.
          */
         public function each( $callable ) {
             $t = $this->_type;
@@ -95,10 +95,10 @@
 
         /**
          * Searches for an element that matches the conditions defined by the specified callable,
-         * and returns the first occurrence within the entire ArrayList.
+         * and returns the first occurrence within the Collection.
          *
          * @param  callable $callable The callable that defines the conditions of the element to search for.
-         * @return mixed The first element that matches the conditions defined by the specified predicate, if found; otherwise, null.
+         * @return mixed    The first element that matches the conditions defined by the specified predicate, if found; otherwise, null.
          */
         public function find( $callable ) {
             if( !is_callable( $callable ) ) {
@@ -118,7 +118,7 @@
          * Retrieves all the elements that match the conditions defined by the specified callable.
          *
          * @param  callable $callable The callable that defines the conditions of the elements to search for.
-         * @return ArrayList A ArrayList containing all the elements that match the conditions defined by the specified callable, if found; otherwise, an empty ArrayList.
+         * @return Collection An Collection containing all the elements that match the conditions defined by the specified callable, if found; otherwise, an empty Collection.
          */
         public function findAll( $callable ) {
             return $this->where( $callable );
@@ -126,10 +126,10 @@
 
         /**
          * Searches for an element that matches the conditions defined by the specified callable,
-         * and returns the last occurrence within the entire ArrayList.
+         * and returns the last occurrence within the Collection.
          *
          * @param  callable $callable The callable that defines the conditions of the element to search for.
-         * @return mixed The last element that matches the conditions defined by the specified callable, if found; otherwise, null.
+         * @return mixed    The last element that matches the conditions defined by the specified callable, if found; otherwise, null.
          */
         public function findLast( $callable ) {
             if( !is_callable( $callable ) ) {
@@ -176,7 +176,7 @@
          * Removes the first occurrence of a specific object from the Collection.
          *
          * @param  mixed $value The value to remove from the Collection.
-         * @return Collection the current Collection.
+         * @return Collection   Returns the current Collection.
          */
         public function remove( $value ) {
             $index = array_search( $value, $this->_items );
@@ -196,8 +196,8 @@
         /**
          * Removes all the elements that match the conditions defined by the specified callable.
          *
-         * @param  callable $callable The callable that defines the conditions of the elements to remove.
-         * @return ArrayList the current ArrayList.
+         * @param  callable   $callable The callable that defines the conditions of the elements to remove.
+         * @return Collection Returns the current Collection.
          */
         public function removeAll( $callable ) {
             if( !is_callable( $callable ) ) {
@@ -234,7 +234,7 @@
          * Bypasses a specified number of elements in the Collection and then returns the remaining elements.
          *
          * @param  int  $count    The number of elements to skip before returning the remaining elements.
-         * @param  bool $keepKeys Whether to keep the keys intacted or not.
+         * @param  bool $keepKeys Whether to keep the keys intact or not.
          * @return Collection A new Collection that contains the elements that occur after the specified index in this Collection.
          */
         protected function skipBase( $count, $keepKeys ) {
@@ -247,7 +247,7 @@
          * Bypasses elements in the Collection as long as a specified condition is true and then returns the remaining elements.
          *
          * @param  callable $callable A callable to test each element for a condition.
-         * @param  bool     $keepKeys Whether to keep the keys intacted or not.
+         * @param  bool     $keepKeys Whether to keep the keys intact or not.
          * @return Collection A Collection that contains the elements starting at the first element in the linear series that does not pass the test specified by predicate.
          */
         protected function skipWhileBase( $callable, $keepKeys ) {
@@ -288,7 +288,7 @@
          * Returns a specified number of contiguous elements from the start of the Collection.
          *
          * @param  int  $count    The number of elements to return.
-         * @param  bool $keepKeys Whether to keep the keys intacted or not.
+         * @param  bool $keepKeys Whether to keep the keys intact or not.
          * @return Collection A new Collection that contains the specified number of elements from the start of this Collection.
          */
         protected function takeBase( $count, $keepKeys ) {
@@ -301,7 +301,7 @@
          * Returns elements from a sequence as long as a specified condition is true.
          *
          * @param  callable $callable A function to test each element for a condition.
-         * @param  bool $keepKeys Whether to keep the keys intacted or not.
+         * @param  bool $keepKeys Whether to keep the keys intact or not.
          * @return Collection A Collection that contains the elements that occur before the element at which the test no longer passes.
          */
         protected function takeWhileBase( $callable, $keepKeys ) {
@@ -350,9 +350,9 @@
         }
 
         /**
-         * Copies the elements of the Colleciton to a new array.
+         * Copies the elements of the Collection to a new array.
          *
-         * @return array An array containing copies of the elements of the ArrayList.
+         * @return array An array containing copies of the elements of the Collection.
          */
         public function toArray() {
             return $this->_items;
@@ -375,7 +375,7 @@
          * Whether or not an index exists.
          *
          * @param  int $index The zero-based index to check for.
-         * @return bool true if the ArrayList contains the key; otherwise, false.
+         * @return bool true if the Collection contains the key; otherwise, false.
          */
         public function offsetExists( $index ) {
             return array_key_exists( $index, $this->_items );
@@ -396,6 +396,7 @@
          *
          * @param  int $index The zero-based index to assign the value to.
          * @param  mixed $value The value to assign.
+         * @return void
          */
         public function offsetSet( $index, $value ) {
             if( is_null( $index ) ) {
@@ -410,6 +411,7 @@
          * Unset the item at a given index.
          *
          * @param int $index The zero-based index to unset the value of.
+         * @return void
          */
         public function offsetUnset( $index ) {
             unset( $this->_items[$index] );

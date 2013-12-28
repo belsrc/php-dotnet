@@ -669,9 +669,9 @@
                 'Beta',
                 'Alpha',
             ) );
-            $this->test->reverse();
-            $msg = "Failed asserting $expected is " . $this->test;
-            $this->assertTrue( $expected == $this->test, $msg );
+            $actual = $this->test->reverse();
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertTrue( $expected == $actual, $msg );
         }
 
         /**
