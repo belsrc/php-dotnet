@@ -3,7 +3,7 @@ PHP-dotNet
 [![Build Status](https://travis-ci.org/belsrc/PHP-dotNet.png?branch=master)](https://travis-ci.org/belsrc/PHP-dotNet)
 [![Latest Stable Version](https://poser.pugx.org/belsrc/PHP-dotNet/v/stable.png)](https://packagist.org/packages/belsrc/PHP-dotNet)
 
-.Net like PHP wrapper classes. Full documentation can be found [here](http://docs.bryanckizer.com/phpnet/)
+PHP wrapper classes that mimic the ..Net List, Dictionary and String classes. Full documentation can be found [here](http://docs.bryanckizer.com/phpnet/)
 
 ```php
     use \PhpDotNet\Collection\ArrayList;
@@ -21,9 +21,21 @@ PHP-dotNet
         'Theta',
     ) );
 
-    echo $list;
-
-    // Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta
+    $list->any( function( $element ) {
+        return $element === '';
+    } );
+    
+    // false
+    
+    $altered = $list->each( function( $element ) {
+        $tmp = str_split( $element );
+        unset( $tmp[0] );
+        return implode( '', $tmp );
+    } );
+    
+    echo $altered;
+    
+    // lpha, eta, amma, elta, psilon, eta, ta, heta
 
     foreach( $list as $item ) {
         echo "$item</br>";
@@ -38,30 +50,6 @@ PHP-dotNet
         Zeta
         Eta
         Theta
-    */
-
-    $dictionary = new Dictionary( array(
-        'Alpha'   => 'Omega',
-        'Beta'    => 'Psi',
-        'Gamma'   => 'Chi',
-        'Delta'   => 'Phi',
-        'Epsilon' => 'Upsilon',
-    ) );
-
-    echo $dictionary;
-
-    // Alpha=>Omega,Beta=>Psi,Gamma=>Chi,Delta=>Phi,Epsilon=>Upsilon
-
-    foreach( $dictionary as $key => $val ) {
-        echo "$key -> $val</br>";
-    }
-
-    /*
-        Alpha -> Omega
-        Beta -> Psi
-        Gamma -> Chi
-        Delta -> Phi
-        Epsilon -> Upsilon
     */
 ```
 
