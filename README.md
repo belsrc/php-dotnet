@@ -3,8 +3,19 @@ PHP-dotNet
 [![Build Status](https://travis-ci.org/belsrc/PHP-dotNet.png?branch=master)](https://travis-ci.org/belsrc/PHP-dotNet)
 [![Latest Stable Version](https://poser.pugx.org/belsrc/PHP-dotNet/v/stable.png)](https://packagist.org/packages/belsrc/PHP-dotNet)
 
-PHP wrapper classes that mimic the .Net List, Dictionary and String classes. Full documentation can be found [here](http://docs.bryanckizer.com/phpnet/)
+PHP wrapper classes that mimic the .Net List, Dictionary and String classes. Full documentation can be found [here](http://docs.bryanckizer.com/phpnet/).
 
+### Install
+You can install it by downloading the [release](https://github.com/belsrc/PHP-dotNet/releases) and including it in your project or, preferably, using Composer.
+```
+{
+    "require": {
+        "belsrc/php-dotnet": "dev-master"
+    }
+}
+```
+
+### Quick Example
 ```php
     use \PhpDotNet\Collection\ArrayList;
     use \PhpDotNet\Collection\Dictionary;
@@ -56,7 +67,7 @@ PHP wrapper classes that mimic the .Net List, Dictionary and String classes. Ful
 ## License ##
 PHP-dotNet is released under a BSD 3-Clause License
 
-Copyright &copy; 2012-2013, Bryan Kizer
+Copyright &copy; 2013-2014, Bryan Kizer
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
