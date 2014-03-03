@@ -2,7 +2,8 @@ PHP-dotNet
 ==========
 [![Build Status](https://travis-ci.org/belsrc/PHP-dotNet.png?branch=master)](https://travis-ci.org/belsrc/PHP-dotNet)
 [![Latest Stable Version](https://poser.pugx.org/belsrc/PHP-dotNet/v/stable.png)](https://packagist.org/packages/belsrc/PHP-dotNet)
-[![License](https://poser.pugx.org/belsrc/PHP-dotNet/license.png)](https://packagist.org/packages/belsrc/PHP-dotNet)
+[![License](https://poser.pugx.org/belsrc/PHP-dotNet/license.png)](https://packagist.org/packages/belsrc/PHP-dotNet)  
+[![Dependency Status](https://www.versioneye.com/user/projects/5313d8b5ec1375103d0000eb/badge.png)](https://www.versioneye.com/user/projects/5313d8b5ec1375103d0000eb)
 
 PHP wrapper classes that mimic the .Net List, Dictionary and String classes. Full documentation can be found [here](http://docs.bryanckizer.com/phpnet/).
 
