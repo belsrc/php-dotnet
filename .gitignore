@@ -1,4 +1,6 @@
 *.url
 *.lock
+*.sublime-project
+*.sublime-workspace
 /vendor
 /docs
