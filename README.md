@@ -2,9 +2,21 @@ PHP-dotNet
 ==========
 [![Build Status](https://travis-ci.org/belsrc/PHP-dotNet.png?branch=master)](https://travis-ci.org/belsrc/PHP-dotNet)
 [![Latest Stable Version](https://poser.pugx.org/belsrc/PHP-dotNet/v/stable.png)](https://packagist.org/packages/belsrc/PHP-dotNet)
+[![License](https://poser.pugx.org/belsrc/PHP-dotNet/license.png)](https://packagist.org/packages/belsrc/PHP-dotNet)
 
-.Net like PHP wrapper classes. Full documentation can be found [here](http://docs.bryanckizer.com/phpnet/)
+PHP wrapper classes that mimic the .Net List, Dictionary and String classes. Full documentation can be found [here](http://docs.bryanckizer.com/phpnet/).
 
+### Install
+You can install it by downloading the [release](https://github.com/belsrc/PHP-dotNet/releases) and including it in your project or, preferably, using Composer.
+```
+{
+    "require": {
+        "belsrc/php-dotnet": "dev-master"
+    }
+}
+```
+
+### Quick Example
 ```php
     use \PhpDotNet\Collection\ArrayList;
     use \PhpDotNet\Collection\Dictionary;
@@ -21,9 +33,21 @@ PHP-dotNet
         'Theta',
     ) );
 
-    echo $list;
-
-    // Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta
+    $list->any( function( $element ) {
+        return $element === '';
+    } );
+    
+    // false
+    
+    $altered = $list->each( function( $element ) {
+        $tmp = str_split( $element );
+        unset( $tmp[0] );
+        return implode( '', $tmp );
+    } );
+    
+    echo $altered;
+    
+    // lpha, eta, amma, elta, psilon, eta, ta, heta
 
     foreach( $list as $item ) {
         echo "$item</br>";
@@ -39,36 +63,12 @@ PHP-dotNet
         Eta
         Theta
     */
-
-    $dictionary = new Dictionary( array(
-        'Alpha'   => 'Omega',
-        'Beta'    => 'Psi',
-        'Gamma'   => 'Chi',
-        'Delta'   => 'Phi',
-        'Epsilon' => 'Upsilon',
-    ) );
-
-    echo $dictionary;
-
-    // Alpha=>Omega,Beta=>Psi,Gamma=>Chi,Delta=>Phi,Epsilon=>Upsilon
-
-    foreach( $dictionary as $key => $val ) {
-        echo "$key -> $val</br>";
-    }
-
-    /*
-        Alpha -> Omega
-        Beta -> Psi
-        Gamma -> Chi
-        Delta -> Phi
-        Epsilon -> Upsilon
-    */
 ```
 
 ## License ##
 PHP-dotNet is released under a BSD 3-Clause License
 
-Copyright &copy; 2012-2013, Bryan Kizer
+Copyright &copy; 2013-2014, Bryan Kizer
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
