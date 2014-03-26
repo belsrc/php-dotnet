@@ -3,7 +3,7 @@
     "type": "library",
     "description": ".Net like methods and classes in PHP",
     "license": "BSD-3-Clause",
-    "homepage": "https://github.com/belsrc/PHP-dotNet",
+    "homepage": "https://github.com/belsrc/php-dotnet",
     "keywords": [".net", "collection", "list", "dictionary", "string"],
     "authors": [
         {
@@ -12,7 +12,7 @@
         }
     ],
     "support": {
-      "issues": "https://github.com/belsrc/PHP-dotNet/issues"
+      "issues": "https://github.com/belsrc/php-dotnet/issues"
     },
     "require": {
         "php": ">=5.4"
