@@ -1,4 +1,4 @@
-<?php namespace PhpDotNet\Collection;
+<?php namespace Belsrc\PhpDotNet\Collection;
 
     /**
      * The interface for the base Collection class.

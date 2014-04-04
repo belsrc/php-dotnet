@@ -1,4 +1,4 @@
-<?php namespace PhpDotNet\Collection;
+<?php namespace Belsrc\PhpDotNet\Collection;
 
     /**
      * Class for modeling a List object.
@@ -18,10 +18,10 @@
          * This may result in unexpected behavior when using an object or NULL replacement.
          *
          * @param  string|array $array The initial values to add to the collection.
-         * @return ArrayList Returns a new instance of the ArrayList class.
+         * @return Belsrc\PhpDotNet\Collection\ArrayList
          */
         public function __construct( $array = null ) {
-            $this->_type = '\PhpDotNet\Collection\ArrayList';
+            $this->_type = 'Belsrc\PhpDotNet\Collection\ArrayList';
 
             if( !is_null( $array ) ) {
                 foreach( (array)$array as $v ) {
@@ -37,7 +37,7 @@
          * This may result in unexpected behavior when using an object or NULL replacement.
          *
          * @param  mixed $mixed The value(s) to be added to the end of the
-         * @return ArrayList Returns the current ArrayList.
+         * @return Belsrc\PhpDotNet\Collection\ArrayList
          */
         public function add( $array ) {
             foreach( (array)$array as $a ) {

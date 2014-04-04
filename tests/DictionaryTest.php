@@ -1,6 +1,6 @@
 <?php
 
-    use \PhpDotNet\Collection;
+    use Belsrc\PhpDotNet\Collection;
 
     require_once 'vendor/autoload.php';
 
@@ -27,7 +27,7 @@
         public function testConstructionException() {
             $d = new Collection\Dictionary( 1 );
         }
-        
+
         /**
          * @test
          */
@@ -54,7 +54,7 @@
             $this->setUp();
             $this->test->add( array() );
         }
-        
+
         /**
          * @test
          * @expectedException Exception
@@ -63,7 +63,7 @@
             $this->setUp();
             $this->test->add( 'string' );
         }
-        
+
         /**
          * @test
          * @expectedException Exception
@@ -72,7 +72,7 @@
             $this->setUp();
             $this->test->add( array( 'Alpha' => 'Tau' ) );
         }
-        
+
         /**
          * @test
          */
@@ -122,7 +122,7 @@
             $msg = "Failed asserting $expected is " . $this->test;
             $this->assertEquals( $expected, $this->test, $msg );
         }
-        
+
         /**
          * @test
          */
@@ -140,7 +140,7 @@
             $msg = "Failed asserting $expected is " . $this->test;
             $this->assertEquals( $expected, $this->test, $msg );
         }
-        
+
         /**
          * @test
          */
@@ -174,7 +174,7 @@
             $msg = "Failed asserting $expected is " . $this->test;
             $this->assertTrue( $expected == $this->test, $msg );
         }
-        
+
         /**
          * @test
          */
@@ -236,7 +236,7 @@
             $msg = "Failed asserting $expected is $actual";
             $this->assertTrue( $expected == $actual, $msg );
         }
-        
+
         /**
          * @test
          */

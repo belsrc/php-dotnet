@@ -25,12 +25,9 @@
     },
     "autoload": {
         "files": ["src/Using.php"],
-        "classmap": [
-            "src",
-            "src/String",
-            "src/Collection",
-            "tests"
-        ]
+        "psr-4": {
+            "Belsrc\\PhpDotNet\\": "src/"
+        }
     },
     "config": {
         "preferred-install": "dist"

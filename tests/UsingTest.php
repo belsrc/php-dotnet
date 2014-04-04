@@ -1,16 +1,17 @@
 <?php
 
-    use \PhpDotNet\IDisposable;
+    use Belsrc\PhpDotNet;
+    use Belsrc\PhpDotNet\IDisposable;
 
     require_once 'vendor/autoload.php';
-    
+
     class Foo implements IDisposable {
         public function hello( $name ) { }
         public function dispose() { }
     }
 
     class UsingTest extends PHPUnit_Framework_TestCase {
-        
+
         /**
          * @test
          */
@@ -28,11 +29,11 @@
 
             PhpDotNet\using( $foo, function( Foo $foo ) {
                 $foo->hello( 'Bar' );
-            });
+            } );
 
             $this->assertTrue( $disposeCalled, 'dispose has been called' );
         }
-        
+
         /**
          * @test
          */
@@ -50,14 +51,14 @@
                 ->method( 'hello' )
                 ->will( $this->returnCallback( function() {
                             throw new \Exception( 'hello function exception' );
-                        }));
+                        } ) );
 
             $this->assertFalse( $disposeCalled, 'dispose not called' );
 
             try {
                 PhpDotNet\using( $foo, function( Foo $foo ) {
-                        $foo->hello( 'Bar' );
-                    });
+                    $foo->hello( 'Bar' );
+                } );
             }
             catch( \Exception $e ) { }
 

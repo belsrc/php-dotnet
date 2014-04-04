@@ -1,4 +1,4 @@
-<?php namespace PhpDotNet\Collection;
+<?php namespace Belsrc\PhpDotNet\Collection;
 
     /**
      * Class for modeling a Dictionary object.
@@ -18,7 +18,7 @@
          * @return Dictionary Returns a new instance of the Dictionary class.
          */
         public function __construct( $values = null ) {
-            $this->_type = '\PhpDotNet\Collection\Dictionary';
+            $this->_type = 'Belsrc\PhpDotNet\Collection\Dictionary';
 
             if( !is_array( $values ) && $values !== null ) {
                 throw new \Exception( 'values must be an array or null' );

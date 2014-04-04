@@ -1,6 +1,6 @@
 <?php
 
-    use \PhpDotNet\Str\Str;
+    use Belsrc\PhpDotNet\String\Strng;
 
     require_once 'vendor/autoload.php';
 
@@ -11,7 +11,7 @@
         // Since this doesn't seem to run for me on each test I'll just
         // call it at the start of each.
         protected function setUp() {
-            $this->test = new Str( 'This is a test string test string' );
+            $this->test = new Strng( 'This is a test string test string' );
         }
 
         /**
@@ -223,7 +223,7 @@
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
-            $test = new Str( 'This has a BMW acronym in it' );
+            $test = new Strng( 'This has a BMW acronym in it' );
             $expected = 'This Has a BMW Acronym in it';
             $actual = $test->toTitleCase();
             $msg = "Failed asserting $expected is $actual";
@@ -317,7 +317,7 @@
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
-        
+
         /**
          * @test
          */
@@ -351,7 +351,7 @@
             $actual = $this->test[0];
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
-            
+
             $this->setUp();
             $expected = 'This is a test string test string!';
             $this->test[] = '!';
@@ -375,13 +375,35 @@
          */
         public function testOffsetUnset() {
             $this->setUp();
-            
+
             // Since it was saying they didn't match, even though they did
             // ill just use string comparison.
-            $expected = new Str( 'his is a test string test string' );
+            $expected = new Strng( 'his is a test string test string' );
             unset( $this->test[0] );
             $actual = (string)$this->test;
             $msg = "Failed asserting $expected is $actual";
             $this->assertTrue( (string)$expected == $actual, $msg );
+        }
+
+        /**
+         * @test
+         */
+        public function testStringFormat() {
+            $format = 'The quick brown {0} jumps over the lazy {1}';
+            $args = array( 'fox', 'dog' );
+            $expected = 'The quick brown fox jumps over the lazy dog';
+            $actual = Strng::format( $format, $args );
+            $msg = "Failed asserting $expected is $actual";
+            $this->assertEquals( $expected, $actual, $msg );
+        }
+
+        /**
+         * @test
+         * @expectedException Exception
+         */
+        public function testStringFormatException() {
+            $format = 'The quick brown {0} jumps over the lazy {1}';
+            $args = array( 'fox' );
+            $actual = Strng::format( $format, $args );
         }
     }

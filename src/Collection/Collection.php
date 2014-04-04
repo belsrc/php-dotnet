@@ -1,4 +1,4 @@
-<?php namespace PhpDotNet\Collection;
+<?php namespace Belsrc\PhpDotNet\Collection;
 
     /**
      * The base class of all Collections.
@@ -185,7 +185,7 @@
                 unset( $this->_items[$index] );
 
                 // If its an ArrayList we need to reindex the array
-                if( $this->_type === '\PhpDotNet\Collection\ArrayList' ) {
+                if( $this->_type === 'Belsrc\PhpDotNet\Collection\ArrayList' ) {
                     $this->_items = array_values( $this->_items );
                 }
             }
@@ -223,7 +223,7 @@
             }
 
             // If its an ArrayList we need to reindex the array
-            if( $this->_type === '\PhpDotNet\Collection\ArrayList' ) {
+            if( $this->_type === 'Belsrc\PhpDotNet\Collection\ArrayList' ) {
                 $this->_items = array_values( $this->_items );
             }
 

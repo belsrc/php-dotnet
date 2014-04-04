@@ -1,6 +1,6 @@
 <?php
 
-    use \PhpDotNet;
+    use Belsrc\PhpDotNet\General;
 
     require_once 'vendor/autoload.php';
 
@@ -20,7 +20,7 @@
         public function testIsArrayEmpty() {
             $array = array();
             $expected = true;
-            $actual = PhpDotNet\General::isArrayEmpty( $array );
+            $actual = General::isArrayEmpty( $array );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
@@ -29,7 +29,7 @@
                 'Beta',
             );
             $expected = false;
-            $actual = PhpDotNet\General::isArrayEmpty( $array );
+            $actual = General::isArrayEmpty( $array );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
         }
@@ -44,7 +44,7 @@
                 array(),
             );
             $expected = true;
-            $actual = PhpDotNet\General::isArrayEmpty( $array );
+            $actual = General::isArrayEmpty( $array );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
 
@@ -57,30 +57,8 @@
                 )
             );
             $expected = false;
-            $actual = PhpDotNet\General::isArrayEmpty( $array );
+            $actual = General::isArrayEmpty( $array );
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
-        }
-
-        /**
-         * @test
-         */
-       public function testStringFormat() {
-            $format = 'The quick brown {0} jumps over the lazy {1}';
-            $args = array( 'fox', 'dog' );
-            $expected = 'The quick brown fox jumps over the lazy dog';
-            $actual = PhpDotNet\General::stringFormat( $format, $args );
-            $msg = "Failed asserting $expected is $actual";
-            $this->assertEquals( $expected, $actual, $msg );
-        }
-
-        /**
-         * @test
-         * @expectedException Exception
-         */
-       public function testStringFormatException() {
-            $format = 'The quick brown {0} jumps over the lazy {1}';
-            $args = array( 'fox' );
-            $actual = PhpDotNet\General::stringFormat( $format, $args );
         }
     }

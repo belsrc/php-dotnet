@@ -1,6 +1,6 @@
 <?php
 
-    use \PhpDotNet\Collection\ArrayList;
+    use Belsrc\PhpDotNet\Collection\ArrayList;
 
     require_once 'vendor/autoload.php';
 
@@ -890,7 +890,7 @@
             $actual = $this->test[0];
             $msg = "Failed asserting $expected is $actual";
             $this->assertEquals( $expected, $actual, $msg );
-            
+
             $this->setUp();
             $expected = 'Lambda';
             $this->test[] = 'Lambda';
@@ -914,7 +914,7 @@
          */
         public function testOffsetUnset() {
             $this->setUp();
-            
+
             // Since it was saying they didn't match, even though they did
             // ill just use string comparison.
             $expected = new ArrayList( array(
